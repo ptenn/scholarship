@@ -1,4 +1,4 @@
-package com.philiptenn.scholarship;
+package com.philiptenn.scholarship.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
