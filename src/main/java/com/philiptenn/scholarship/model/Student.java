@@ -4,7 +4,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
 
 /**
  * @author <a href="mailto:ptenn@users.noreply.github.com">Philip Tenn</a>
@@ -25,6 +30,14 @@ public class Student
 
     @Column(name = "student_number")
     private Integer studentNumber;
+
+    @Column(name = "created")
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime created;
+
+    @Column(name = "updated")
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime updated;
 
     /**
      * Get the Unique ID of the Student Model object
@@ -83,4 +96,15 @@ public class Student
     public void setStudentNumber(Integer studentNumber) {
         this.studentNumber = studentNumber;
     }
+
+    @PrePersist
+    protected void onCreate() {
+        created = new DateTime();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updated = new DateTime();
+    }
+
 }
