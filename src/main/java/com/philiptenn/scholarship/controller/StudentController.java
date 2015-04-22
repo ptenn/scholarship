@@ -37,7 +37,7 @@ public class StudentController {
 
     @RequestMapping(value="/create", method= RequestMethod.GET)
     public ModelAndView newStudentPage() {
-        ModelAndView mav = new ModelAndView("student-new", "student", new Student());
+        ModelAndView mav = new ModelAndView("student/new", "student", new Student());
         return mav;
     }
 
@@ -47,7 +47,7 @@ public class StudentController {
                                       final RedirectAttributes redirectAttributes) {
 
         if (result.hasErrors())
-            return new ModelAndView("student-new");
+            return new ModelAndView("student/new");
 
         ModelAndView mav = new ModelAndView();
         String message = "New student "+student.getFirstName()+" " + student.getLastName() + " was successfully created.";
@@ -61,7 +61,7 @@ public class StudentController {
 
     @RequestMapping(value="/list", method=RequestMethod.GET)
     public ModelAndView studentListPage() {
-        ModelAndView mav = new ModelAndView("student-list");
+        ModelAndView mav = new ModelAndView("student/list");
         List<Student> studentList = studentService.findAll();
         mav.addObject("studentList", studentList);
         return mav;
@@ -69,7 +69,7 @@ public class StudentController {
 
     @RequestMapping(value="/edit/{id}", method=RequestMethod.GET)
     public ModelAndView editStudentPage(@PathVariable Integer id) {
-        ModelAndView mav = new ModelAndView("student-edit");
+        ModelAndView mav = new ModelAndView("student/edit");
         Student student = studentService.findById(id);
         mav.addObject("student", student);
         return mav;
@@ -82,7 +82,7 @@ public class StudentController {
                                  final RedirectAttributes redirectAttributes) throws StudentNotFound {
 
         if (result.hasErrors())
-            return new ModelAndView("student-edit");
+            return new ModelAndView("student/edit");
 
         ModelAndView mav = new ModelAndView("redirect:/index.html");
         String message = "Student was successfully updated.";

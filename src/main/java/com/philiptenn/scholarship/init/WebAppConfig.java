@@ -16,7 +16,6 @@ import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
-import org.springframework.web.servlet.handler.AbstractHandlerMapping;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
@@ -25,6 +24,8 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 /**
+ * Spring JavaConfig Web Application Configuration for Spring MVC App.
+ *
  * @author <a href="mailto:ptenn@users.noreply.github.com">Philip Tenn</a>
  */
 @Configuration
@@ -32,7 +33,7 @@ import java.util.Properties;
 @EnableTransactionManagement
 @ComponentScan("com.philiptenn.scholarship")
 @PropertySource("classpath:application.properties")
-@EnableJpaRepositories("com.philiptenn.scholarship.repository")
+@EnableJpaRepositories(basePackages = "com.philiptenn.scholarship.repository")
 public class WebAppConfig extends WebMvcConfigurationSupport {
 
     private static final String PROPERTY_NAME_DATABASE_DRIVER = "db.driver";
@@ -55,8 +56,7 @@ public class WebAppConfig extends WebMvcConfigurationSupport {
     @Override
     @Bean
     public HandlerMapping resourceHandlerMapping() {
-        AbstractHandlerMapping handlerMapping = (AbstractHandlerMapping) super.resourceHandlerMapping();
-        return handlerMapping;
+        return super.resourceHandlerMapping();
     }
 
     @Bean

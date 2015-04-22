@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 /**
  * @author <a href="mailto:ptenn@users.noreply.github.com">Philip Tenn</a>
  */
-@Repository
 public interface StudentRepository extends JpaRepository<Student, Integer> {
 }
